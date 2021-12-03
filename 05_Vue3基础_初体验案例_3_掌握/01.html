@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>事件</title>
+</head>
+<body>
+<div id="app">
+
+    <h2>{{msg}}</h2>
+    <p>----------- 指令 ----------</p>
+    <button v-on:click="msg ='test1'">test 1</button>
+    <button v-on:click="msg ='test2'"> test 2</button>
+
+    <p>----------- 方法 ----------</p>
+    <button v-on:click="one">test 1</button>
+    <button @click="two"> test 2</button>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const my_app = {
+
+        data(){
+            return{
+                msg: ''
+            }
+        },
+
+        methods:{
+            one(){
+                // this 指的是 my_app 这个实例
+                this.msg = 'test one'
+               // alert('test one')
+            },
+            two(){
+                this.msg = 'test two'
+                // alert('test two')
+            }
+
+        }
+    }
+
+    const app = Vue.createApp(my_app).mount('#app');
+
+</script>
+
+
+</body>
+</html>

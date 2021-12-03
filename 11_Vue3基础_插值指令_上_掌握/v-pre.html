@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-pre</title>
+</head>
+<body>
+
+
+
+<div id="app">
+
+    <h1>{{msg}}</h1>
+    <p>----------------------</p>
+    <p>添加 v-pre 不产生编译</p>
+    <p v-pre>不产生编译： {{msg}}</p>
+
+</div>
+
+
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+            }
+        }
+    }).mount('#app');
+
+</script>
+
+
+
+</body>
+</html>

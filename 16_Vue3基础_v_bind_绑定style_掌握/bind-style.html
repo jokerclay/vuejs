@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind style</title>
+</head>
+<style>
+    .F50{
+        font-size: 50px;
+    }
+    .red{
+        color: red;
+    }
+</style>
+<body>
+
+<div id="app">
+    <h1 style="color: red; font-size:50px">{{msg}}</h1>
+    <h1 :style="getStyle()">{{msg}}</h1>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'Hi',
+                red:'red',
+                f50:'100px'
+            }
+        },
+        methods:{
+            getStyle(){
+                return{color: this.red,fontSize:this.f50}
+            }
+        }
+    }).mount('#app');
+</script>
+
+</body>
+</html>
+
+
+

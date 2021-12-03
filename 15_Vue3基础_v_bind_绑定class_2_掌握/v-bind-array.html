@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind-array</title>
+</head>
+<style>
+    .Red{
+        color: red;
+    }
+    .Blue{
+        color: blue;
+    }
+    .F60{
+        font-size: 60px;
+    }
+</style>
+<body>
+
+<div id="app">
+    <p>用数组的特点就是可以变化</p>
+    <h1 :class="[red,F60]">{{msg}}</h1>
+    <h1 :class="[red,F60,blue]">{{msg}}</h1>
+    <p>写的简洁一点抽象成函数</p>
+    <h1 :class="getClass()">{{msg}}</h1>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                red: 'Red',
+                F60: 'F60',
+                blue: 'Blue',
+            }
+        },
+        methods:{
+            getClass(){
+                return[this.red,this.F60]
+            }
+
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

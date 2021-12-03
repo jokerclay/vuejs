@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>v-text</title>
+</head>
+<body>
+
+<div id="app">
+    <p>------------- using mustache ------------- </p>
+    <p>建议使用</p>
+   <h1>{{msg}} 123</h1>
+
+    <p>------------- using v-text ------------- </p>
+    <p>写在标签原来属性的位置，会把内部的文字覆盖掉</p>
+    <h1 v-text="msg">123</h1>
+
+</div>
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+            }
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind-class</title>
+    <style>
+        .red {
+            color: red;
+        }
+        .F60{
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <p>--------- class = "red" 写死 --------- </p>
+    <h1 class="red">{{msg}}</h1>
+
+    <p>--------- class = "red" 渲染成字符串 --------- </p>
+    <p>v-bind 动态绑定 class, :class="arg1" 到 vue 实例中找 arg1,</p>
+    <p>找到 arg1 渲染成字符串 red, 实现 class = "red" 效果</p>
+    <p>它的意义体现在多个组件之间 进行数据的传递</p>
+    <h1 :class="arg1">{{msg}}</h1>
+
+    <p> =========== 多个样式作用在一个元素 =========== </p>
+    <strong><li class="red">以对象传递的方式</li></strong>
+    <p>以对象传递的方式 格式</p>
+    <p>:class="{类名：布尔值，类名：布尔值，类名：布尔值，}"</p>
+    <p>以布尔值的方式 更加灵活的控制 样式的 true/ false</p>
+    <p class="red">静态写入的（写死）的class 不会被 vue 传入的 覆盖掉，可以同时作用一个标签</p>
+
+    <h1 class="我是一个直接写入的class" :class="{red:isRed,F60:isF60}">{{msg}}</h1>
+    <p>---------- 将对象抽象成函数 --------------</p>
+    <h1 :class="getClass()">{{msg}}</h1>
+
+    <button @click="change">change</button>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                red:'red',
+                F60:'F60',
+                isRed:true,
+                isF60:true,
+            }
+        },
+        methods:{
+            change(){
+                this.isRed = !this.isRed;
+                this.isF60 = !this.isF60;
+            },
+            getClass() {
+                return {red:this.isRed,F60:this.isF60}
+            }
+
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

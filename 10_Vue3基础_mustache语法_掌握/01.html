@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>mustache</title>
+</head>
+<body>
+<!--
+1. {{}} -> 双大括号 mustache 语法
+2. 内部放 变量/ 表达式
+3. 不能放大段的语句
+4. 只能作用在标签的内部
+-->
+
+<div id="app">
+  <h1>{{msg}}</h1>
+  <h1>{{msg}} my blog's site</h1>
+  <h1>{{msg}} {{site}}</h1>
+  <h1>{{msg + site}}</h1>
+  <h1>{{msg +  '   ' + site}}</h1>
+  <h1>{{count + 1 }}</h1>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+  const app = Vue.createApp({
+    data(){
+      return{
+        msg:'hi',
+        site:'https://blog.clayliu.com/',
+        count: 2,
+      }
+    }
+  }).mount('#app');
+</script>
+
+</body>
+</html>

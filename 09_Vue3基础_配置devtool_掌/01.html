@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>模板</title>
+</head>
+<body>
+
+<!--  快速获取 vue 模板 vue-<tab> -->
+<div id="app">
+  <h1>{{msg}}</h1>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = Vue.createApp({
+    data(){
+      return{
+        msg:'hi',
+      }
+    }
+  }).mount('#app');
+
+
+//  安装 devTool 网址
+// chrome store vue.js dev tool
+
+</script>
+</body>
+</html>

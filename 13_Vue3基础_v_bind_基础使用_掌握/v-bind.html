@@ -1,0 +1,46 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+<div id="app">
+    <h1>{{msg}}</h1>
+    <p>-----------------</p>
+
+    <img src="{{imgUrl}}" alt="">
+
+    <p>------- 动态绑定----------</p>
+    <p>对标签内的属性进行动态的渲染 1</p>
+    <img v-bind:src="imgUrl" v-bind:alt="alt">
+    <a v-bind:href="blogSite" target="_blank">my blog</a>
+
+    <p>------- 简写，语法糖----------</p>
+    <img :src="imgUrl" :alt="alt">
+    <a :href="blogSite" target="_blank">my blog</a>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                imgUrl:'https://avatars.githubusercontent.com/u/38083660?v=4',
+                alt:'this is my alt',
+                blogSite:'https://blog.clayliu.com',
+            }
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>v-cloak</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h1>{{msg}}</h1>
+    <p>---------- v-cloak ----------</p>
+    <p>服务端网络请求有延迟时，会出现 显示 mustache 语法 的情况</p>
+    <p>将 v-cloak 设为 display:none 解决该问题</p>
+    <p>当以引入的方式引入VUE 会出现该问题，在工程化的时候不会</p>
+    <h1 v-cloak>{{msg}}</h1>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    setTimeout(()=>{
+        const app = Vue.createApp({
+            data(){
+                return{
+                    msg:'hi',
+                }
+            }
+        }).mount('#app');
+
+    },2000);
+
+</script>
+
+</body>
+</html>

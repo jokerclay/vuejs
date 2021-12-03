@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>插值语法</title>
+</head>
+<body>
+
+<div id="app">
+    <p>-------------- v-once -------------- </p>
+    <p>在控制台无法改变</p>
+    <h1>会变化{{msg}}</h1>
+    <h1 v-once>不会变化{{msg}}</h1>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+            }
+        }
+    }).mount('#app');
+
+</script>
+</body>
+</html>

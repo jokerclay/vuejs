@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div>{{courses}}</div>
+    <p>--------------------------------</p>
+    <ul>
+        <li>{{courses[0]}}</li>
+        <li>{{courses[1]}}</li>
+        <li>{{courses[2]}}</li>
+        <li>{{courses[3]}}</li>
+    </ul>
+    <p>--------------- 指令 --------------</p>
+    <ul>
+        <li v-for="course in courses">{{course}}</li>
+    </ul>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    // 创建实例对象
+    const list_app = {
+        data(){
+            return{
+                courses: ['web','python', 'javascript','java']
+            }
+        }
+    };
+    // 创建VUE实例
+    const app = Vue.createApp(list_app).mount('#app');
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
