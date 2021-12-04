@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>v-model 基本使用</title>
+</head>
+<body>
+<div id="app">
+    <p>---------- 使用v-model -----------</p>
+    <input type="text" v-model="msg">
+    <h2>{{msg}}</h2>
+
+    <p>---------- v-model 底层实现 -----------</p>
+    <input type="text" :value="msg" @input="valueChange">
+    <h2>{{msg}}</h2>
+
+
+    <p>--------------------------------</p>
+    <input type="text" :value="msg" @input="msg=$event.target.value">
+    <h2>{{msg}}</h2>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+  const app = Vue.createApp({
+    data(){
+      return{
+        msg:'hello',
+      }
+    },
+    methods:{
+        valueChange(enent){
+            this.msg = event.target.value;
+        }
+
+
+    }
+  }).mount('#app');
+
+</script>
+
+</body>
+</html>
+

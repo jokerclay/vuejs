@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>对比key的绑定</title>
+</head>
+<body>
+
+<div id="app">
+<!--    key 的作用是为了更高效的更新 虚拟dom
+        key 是给每一个 node 唯一的 id, 可以依靠 key 更准确，更高效的更新虚拟 DOM
+        key 的使用可以避免未知的 bug 和错误
+-->
+    <div>
+        <lable>ID: <input type="text" v-model="id"></lable>
+        <lable>Name: <input type="text" v-model="name"></lable>
+        <button @click="add">添加</button>
+    </div>
+    <p>------------------------------------------------</p>
+    <ul>
+        <li v-for="item in list_arr" :key="item.id">
+            <input type="checkbox">
+            {{item.id}} ---- {{item.name}}
+        </li>
+    </ul>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+
+        data(){
+            return{
+                id:'',
+                name:'' ,
+                list_arr:[
+                    {id:1,name:'john'},
+                    {id:2,name:'tom'},
+                    {id:3,name:'tim'},
+                    {id:4,name:'jane'},
+                    {id:5,name:'jojo'},
+                    {id:6,name:'cc'},
+                ],
+            }
+        },
+
+        methods:{
+            add(){
+                // 尾部追加
+                // this.list_arr.push({id:this.id,name:this.name})
+                // 头部追加
+                // this.list_arr.unshift({id:this.id,name:this.name})
+                // 中间追加
+                this.list_arr.splice(2,0,{id:this.id,name:this.name})
+            }
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

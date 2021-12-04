@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model 单选</title>
+</head>
+<body>
+
+<!--        v-mode 实现 单选        -->
+
+<div id="app">
+    <lable><input name="sex"  type="radio" value="男" v-model="sex">男</lable>
+    <lable><input name="sex"  type="radio" value="女" v-model="sex">女</lable>
+    <p>------------------------------------</p>
+    <h2>选择的性别是 ： {{sex}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                sex:'男',
+            }
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

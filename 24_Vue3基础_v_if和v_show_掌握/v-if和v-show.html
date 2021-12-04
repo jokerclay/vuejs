@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>v-if 和 v-show</title>
 </head>
 <body>
-$END$
+
+<div id="app">
+
+    <div v-if="flag">明天要下雨 !</div>
+    <div v-else>明天不下雨 !</div>
+
+    <p>----------------------------</p>
+
+    <div v-show="flag">明天要上课</div>
+    <div v-show="!flag">明天不上课</div>
+
+    <button @click="flag = !flag">切换</button>
+
+<!--    v-if 和 v-show 的 区别
+        1. v-if 是真正的条件渲染,因为他会确保在切换过程中条件块内的事件监听器和子组件
+           适当的被销毁和重建
+        2. v-show 不管初始条件是什么，元素总会被渲染，并且只是简单的基于 CSS 进行切换
+           如果需要频繁的切换， v-show 较好
+-->
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                flag: true,
+            }
+        }
+    }).mount('#app');
+
+</script>
+
 </body>
 </html>

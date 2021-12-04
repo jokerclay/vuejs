@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>计算属性基本属性</title>
 </head>
 <body>
-$END$
+
+
+
+<div id="app">
+    <p>---------- 常规做法 ----------  </p>
+    <p>Full name is {{ firstName +  '-' + lastName}}</p>
+
+    <p>---------- 函数做法 ----------  </p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+    <p>Full name is {{getFullName()}}</p>
+
+
+    <p>---------- 使用计算属性做法 ----------  </p>
+    <p>当属性之间需要进行一些运算的时候推荐使用计算属性</p>
+    <p>注意：计算属性是类似函数的写法，但尽量不要用 get..() 之类的来写</p>
+    <p>以属性的命名来写</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+    <p>Full name is {{fullName}}</p>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                firstName: 'clay',
+                lastName: 'liu',
+            }
+        },
+        methods:{
+            getFullName(){
+                console.log('---------- getFullName ---------- ');
+                return this.firstName + '-' + this.lastName;
+            }
+        },
+        computed:{
+            fullName(){
+                console.log('---------- fullName ---------- ');
+                return this.firstName + '-'+this.lastName;
+            }
+        },
+        /*
+        * 如果 fullName 只调用 一次，用 函数和计算属性没有区别
+        * 如果 fullName 要在页面中运用很多次
+        *
+        * 计算属性 和 methods 的区别:
+        * 1. 计算属性会缓存属性的结果,如果在页面中多次调用，计算属性发现值没有改变，会直接取缓存中的值
+        * 2. 使用 methods 每次都要运算
+        * 3. 计算属性多次运用时，先运行一次，第二次运行时，会检查与缓存中的值一不一致，一致的话直接取，
+        *    不一致的话会改变
+        **/
+
+
+    }).mount('#app');
+
+</script>
+
+
 </body>
 </html>

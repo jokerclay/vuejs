@@ -28,7 +28,11 @@
     </div>
 
     <ul>
-        <li v-for="(p,index) in filterPersons">
+<!--       绑定 key 做唯一的标识符 diff 算法就能正确的识别节点，找到正确的位置插入新的节点
+           避免未知的错误
+           最好使用字符串，或数值类型等基本数据结构
+-->
+        <li v-for="(p,index) in filterPersons" :key="id">
             {{index+1}}--姓名：{{p.name}}--性别：{{p.sex}}--年龄:{{p.age}}--电话：{{p.phone}}
         </li>
     </ul>

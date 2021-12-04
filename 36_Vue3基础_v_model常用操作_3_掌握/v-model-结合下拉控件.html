@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结合下拉</title>
+</head>
+<body>
+
+
+<h1>====== 结合下拉 ====== </h1>
+
+<div id="app">
+    <p>选择所在城市</p>
+
+    <select name="city" id="" v-model="city">
+        <option value="New York">New York</option>
+        <option value="南京"> 南京</option>
+        <option value="上海"> 上海</option>
+        <option value="北京">北京 </option>
+    </select>
+
+    <p>选择的城市是：{{city}}</p>
+    <p>----------------------------------------</p>
+    <p>选择所在城市</p>
+    <p>按住  ctrl 键 多选</p>
+
+    <select name="city" id="" v-model="cities" multiple>
+        <option value="New York">New York</option>
+        <option value="南京"> 南京</option>
+        <option value="上海"> 上海</option>
+        <option value="北京">北京 </option>
+    </select>
+
+    <p>选择的城市是：{{cities}}</p>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                city: 'New York',
+                cities: 'New York',
+            }
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

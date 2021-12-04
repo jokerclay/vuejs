@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>计算属性复杂使用</title>
 </head>
 <body>
-$END$
+
+<div id="app">
+    <p>计算属性计本质上还是属性，不过是通过多个属性 计算得到一个属性进行展示</p>
+    <p> 我们计算过程放到计算属性中去</p>
+    <p>---------- 不合适的操作 ---------- </p>
+    <p>会员总积分 ： {{this.members[0].score+this.members[1].score+this.members[2].score+this.members[3].score}}</p>
+
+    <p>---------- 合适的操作 ---------- </p>
+    <p>会员总积分： {{totalScore}}</p>
+
+
+
+
+
+
+
+
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                members: [
+                    {id:'001',name:'john', score:123},
+                    {id:'002',name:'tom', score:456},
+                    {id:'003',name:'jane', score:789},
+                    {id:'004',name:'tim', score:321},
+                ]
+            }
+        },
+        computed:{
+            totalScore(){
+                let total = 0;
+                for (let member of this.members) {
+                    total += member.score;
+                }
+                return total;
+            }
+        }
+    }).mount('#app');
+
+</script>
+
 </body>
 </html>

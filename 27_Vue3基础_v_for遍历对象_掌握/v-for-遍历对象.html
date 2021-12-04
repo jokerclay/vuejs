@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>v-for-遍历对象</title>
 </head>
 <body>
-$END$
+
+
+
+<div id="app">
+
+    <p> ----------- 遍历对象 ----------- </p>
+    <ul>
+        <li v-for="item in person">{{item}}</li>
+    </ul>
+
+    <p> ----------- key ----------- </p>
+    <ul>
+        <li v-for="(item,key) in person">{{key}}:{{item}}</li>
+    </ul>
+
+    <p> ----------- index ----------- </p>
+    <ul>
+        <li v-for="(item,key,index) in person">{{index}}--{{key}}:{{item}}</li>
+    </ul>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                person: {
+                    name:'clay',
+                    age:'20',
+                    friends:['tim','tom','jane'],
+                }
+            }
+        }
+    }).mount('#app');
+
+</script>
+
 </body>
 </html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小案例</title>
+    <style>
+
+        #app{
+            /*text-align: center;*/
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div id="app">
+    <fieldset>
+        <legend>课程录入（基于 :Vue）</legend>
+
+        <div>
+            <label>姓名:
+                <input type="text" placeholder="请输入姓名" v-model.trim="new_person.name">
+            </label>
+        </div>
+
+        <div>
+            <label>年龄:
+                <input type="text" placeholder="请输入年龄"  v-model.trim="new_person.age">
+            </label>
+        </div>
+
+        <div>
+            <label>性别:
+                <select name="" id="" v-model="new_person.sex" >
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </label>
+        </div>
+
+        <div>
+            <label>手机号码:
+                <input type="text" placeholder="请输入手机号码" v-model.trim="new_person.phone">
+            </label>
+        </div>
+
+        <button @click="addUser()"> 创建新用户</button>
+
+    </fieldset>
+
+<!-- ---------- 下部分 ----------- -->
+    <table>
+        <thead>
+            <tr>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>年龄</td>
+                <td>手机</td>
+                <td>删除</td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(p,index) in persons" :key="p.id" >
+            <td>{{p.name}}</td>
+            <td>{{p.sex}}</td>
+            <td>{{p.age}}</td>
+            <td>{{p.phone}}</td>
+            <td><button @click="delete_p(index)">删除</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                persons:[
+                    {name:'张三',age:'18',sex:'男',phone:'1513415648894'},
+                    {name:'李四',age:'21',sex:'男',phone:'1513415648894'},
+                    {name:'王五',age:'22',sex:'男',phone:'1513415648894'},
+                    {name:'程一',age:'23',sex:'女',phone:'1513415648894'},
+                ],
+                new_person:{name:'',age:'',sex:'男',phone:''},
+            }
+        },
+        methods: {
+            // 删除记录
+            delete_p(index){
+                this.persons.splice(index,1);
+            },
+            // 添加用户
+            addUser(){
+                const {name,age,sex,phone} = this.new_person;
+                // 1. 判断
+                if( !name || !age || !sex || !phone){
+                    alert('输入内容不完整')
+                    return;
+                }
+                // 2.插入一条数据
+                this.persons.unshift(this.new_person);
+            }
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

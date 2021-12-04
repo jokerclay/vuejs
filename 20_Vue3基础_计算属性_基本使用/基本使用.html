@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>计算属性基本属性</title>
 </head>
 <body>
-$END$
+
+
+
+<div id="app">
+    <p>---------- 常规做法 ----------  </p>
+    <p>Full name is {{ firstName +  '-' + lastName}}</p>
+
+    <p>---------- 函数做法 ----------  </p>
+    <p>Full name is {{getFullName()}}</p>
+
+
+    <p>---------- 使用计算属性做法 ----------  </p>
+    <p>当属性之间需要进行一些运算的时候推荐使用计算属性</p>
+    <p>注意：计算属性是类似函数的写法，但尽量不要用 get..() 之类的来写</p>
+    <p>以属性的命名来写</p>
+    <p>Full name is {{fullName}}</p>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                firstName: 'clay',
+                lastName: 'liu',
+            }
+        },
+        methods:{
+            getFullName(){
+                return this.firstName + '-' + this.lastName;
+            }
+        },
+        computed:{
+            fullName(){
+                return this.firstName + '-'+this.lastName;
+            }
+        }
+
+
+    }).mount('#app');
+
+</script>
+
+
 </body>
 </html>

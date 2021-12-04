@@ -1,10 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>区别案例</title>
 </head>
+
 <body>
-$END$
+
+<div id="app">
+
+    <p> --------- v-if v-else-if 实现 ----------</p>
+
+    <div v-if="loginType === 'phone'">
+        <lable>手机号</lable>
+        <input type="text" placeholder="请输入手机号:">
+        <br>
+        <lable>密码</lable>
+        <input type="text" placeholder="请输入密码:" >
+    </div>
+    <div v-else-if="loginType === 'wechat'">
+        <lable>微信号</lable>
+        <input type="text" placeholder="请输入微信号:">
+        <br>
+        <lable>密码</lable>
+        <input type="text" placeholder="请输入密码:" >
+    </div>
+
+    <button @click="change()">切换登录方式</button>
+
+    <p> --------- v-show 实现 ----------</p>
+
+    <div v-show="loginType === 'phone'">
+        <lable>手机号</lable>
+        <input type="text" placeholder="请输入手机号:">
+        <br>
+        <lable>密码</lable>
+        <input type="text" placeholder="请输入密码:" >
+    </div>
+
+    <div v-show="loginType === 'wechat'">
+        <lable>微信号</lable>
+        <input type="text" placeholder="请输入微信号:">
+        <br>
+        <lable>密码</lable>
+        <input type="text" placeholder="请输入密码:" >
+    </div>
+
+    <p> --------- 区别 ----------</p>
+    <p>v-show 写入的内容，在切换时，里面的东西还是在的</p>
+    <p>v-if 写入的内容，切换之后里面的东西都会被销毁,切换后重新创建</p>
+
+    <button @click="change()">切换登录方式</button>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                loginType: 'phone',
+            }
+        },
+        methods: {
+            change(){
+                this.loginType === 'phone' ? this.loginType= 'wechat' : this.loginType= 'phone';
+            }
+        }
+    }).mount('#app');
+
+</script>
+
 </body>
+
 </html>

@@ -7,6 +7,20 @@
 <body>
 
 <div id="app">
+    <p>---------- 不带参数的 ----------</p>
+    <p>undefined</p>
+    <button @click="btn1Click()">按钮 1</button>
+    <p>不加 （） 默认传递事件</p>
+    <button @click="btn2Click">按钮 2</button>
+
+
+    <p>---------- 带参数的 ----------</p>
+    <button @click="btn3Click(123,'abc',true,msg)">按钮 3</button>
+
+    <p>---------- 带参数的有需要事件对象 ----------</p>
+    <p>使用 $event 传递对象</p>
+    <p>一般把参数放到前面，事件对象放到最后</p>
+    <button @click="btn4Click(123,'abc',true,msg,$event)">按钮 4</button>
 
 </div>
 
@@ -17,8 +31,26 @@
     const app = Vue.createApp({
         data(){
             return{
-                msg:'hi',
+                msg:'I am clay',
+
             }
+        },
+        methods:{
+            btn1Click(args) {
+                console.log(args)    // undefined
+            },
+            btn2Click(args) {
+                console.log(args)    // event
+            },
+            btn3Click(arg1 , arg2, arg3, arg4) {
+                console.log(arg1 , arg2, arg3, arg4)
+                console.log(arguments)
+            },
+            btn4Click(arg1 , arg2, arg3,arg4, event) {
+                console.log(arg1 , arg2, arg3,arg4, event)
+                // console.log(arguments)
+            },
+
         }
     }).mount('#app');
 

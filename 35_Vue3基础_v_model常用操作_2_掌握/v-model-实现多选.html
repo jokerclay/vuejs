@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model 实现多选</title>
+</head>
+<body>
+
+<div id="app">
+    <p>--------------- v-model 多选 --------------- </p>
+    <p>--------------- v-model 勾选一个 --------------- </p>
+    <lable>
+        <input type="checkbox" v-model="isAgree" > 同意协议
+    </lable>
+    <h2>是否同意协议: {{isAgree ? '同意':'不同意'}}</h2>
+    <button :disabled="!isAgree"> 下一步</button>
+
+
+    <p>--------------- v-model 勾选多个 --------------- </p>
+
+    <lable>兴趣爱好</lable>
+    <br>
+    <input type="checkbox" value="篮球" v-model="hobbies">篮球
+    <input type="checkbox" value="足球" v-model="hobbies">足球
+    <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+    <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+
+    <h2>用户的兴趣爱好： {{hobbies}}</h2>
+
+
+    <p>--------------- 值绑定(值来自服务端)(动态的) --------------- </p>
+
+    <lable v-for="star in stars" :for="star">
+        <input type="checkbox" :value="star" id="star" v-model="likes">{{star}}
+    </lable>
+
+    <h2>用户喜欢： {{likes }}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                isAgree:'',
+                hobbies:[],
+                stars:['周杰伦','刘德华','谢霆锋','胡歌'],
+                likes:[]
+            }
+        }
+    }).mount('#app');
+</script>
+
+</body>
+</html>

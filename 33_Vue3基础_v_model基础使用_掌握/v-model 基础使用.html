@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model 基本使用</title>
+</head>
+<body>
+<div id="app">
+<!--    v-model 常用于表单..
+        双向绑定，一个输入框，一个属性，双向进行绑定
+        输入框里面的内容变化，属性也跟着变化,属性变化，输入框中的内容也跟着变化
+-->
+    <input type="text" v-model="msg">
+
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hello',
+            }
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>
+

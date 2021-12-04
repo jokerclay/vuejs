@@ -1,10 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>内部实现</title>
 </head>
 <body>
-$END$
+
+
+<div id="app">
+    <p>FullName: {{fullName}}</p>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+//    let num1 = 100;         // 指针指向栈区
+//    console.log(num1);      // 调用 get 方法
+//    num1 = 200;             // 调用 set 方法（赋值）
+//    console.log(num1);
+
+
+
+   const app = Vue.createApp({
+       data(){
+           return{
+               firstName: 'clay',
+               lastName:'liu',
+           }
+       },
+       computed:{
+
+           // 最原始的形态
+           // 计算属性中有两个方法: getter & setter
+           // 使用计算属性大多数是 使用 get 方法，并不期望 使用 set 其中的只改变
+
+           fullName :{
+               // 修改计算属性
+               set(newValue){
+                   console.log('-------- set() ---------', newValue);
+                   const nameArr = newValue.split('-');
+                   this.firstName = nameArr[0];
+                   this.lastName = nameArr[1];
+               },
+
+               get(){
+                  console.log('-------- get() ---------');
+                  return this.firstName + '-' + this.lastName;
+               },
+
+               // 因为基本上 不用 set 方法，所以，Vue 【简化】成了如下的形式
+               fullName(){
+                   return this.firstName + '-' + this.lastName;
+               },
+           }
+
+       }
+   }).mount('#app');
+
+</script>
+
 </body>
 </html>
