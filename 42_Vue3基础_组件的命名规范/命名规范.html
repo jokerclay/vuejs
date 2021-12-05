@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的基本使用</title>
+</head>
+<body>
+<p>========= 命名规范 ========= </p>
+<p>1. kebab-case</p>
+<p>
+    app.component('my-component-name',{ .....})
+</p>
+<p>引用这个自定义元素时使用kebab-case 例如　 &lt; my-component-name &gt;　</p>
+<p>2. PascalCase</p>
+<p>
+    app.component('my-component-name',{ .....})
+</p>
+<p>
+    &lt; my-component-name &gt;
+    &lt; MyComponentName &gt;
+    均可
+</p>
+<p>注意：直接在 DOM （即非字符串的模板中）使用时 只有 kebab-case 是有效的</p>
+
+
+
+
+<div id="app">
+
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+
+    <p> ------------ 命名规范 -----------</p>
+    <p>以引入的方式引入 vue 时， TestCase 命名是无效的</p>
+    <TestCase></TestCase>
+    <p>以引入的方式引入 vue,  注册组件名为 TestCase </p>
+    <p>使用时 用
+        <br>
+        &lt;  Test-Case &gt;
+        <br>
+        &lt; test-case &gt;
+        <br>
+        有效
+    </p>
+    <Test-Case></Test-Case>
+    <test-case></test-case>
+
+
+    <p>---------------------</p>
+    <strong>
+        <p>在以工程化 vue-cli 引入时 都可以使用</p>
+    </strong>
+
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    // 1. 创建 vue 实例
+    const app = Vue.createApp({
+        data(){
+            return{
+
+            }
+        }
+    });
+    // 2. 定义一个 vue 全局组件
+    app.component('button-counter', {
+        data() {
+            return {
+                count: 0
+            }
+        },
+        // template: `<button v-on:click="count++">You clicked me {{ count }} times.</button>`
+        template:`
+            <button @click="count++"> 你点击了我 {{count}} 次</button>
+
+        `
+    })
+    app.component('TestCase', {
+        data() {
+            return {
+                count: 0
+            }
+        },
+        // template: `<button v-on:click="count++">You clicked me {{ count }} times.</button>`
+        template:`
+          <button @click="count++"> TestCase {{count}} </button>
+
+        `
+    })
+
+    // 3. 挂载 vue 实例 到 #app 视图上面
+    app.mount('#app');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue 创建多个实例</title>
+    <style>
+        #app{
+            background-color: aquamarine;
+            width: 400px;
+        }
+        #root{
+            background-color: teal;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+<strong>一个页面中可以创建多个 vue 实例</strong>
+<p>一般 一个 vue 应用使用 一个 vue 实例</p>
+
+<div id="app">
+    <h1>{{msg}}</h1>
+</div>
+
+<div id="root">
+    <h1>{{text}}</h1>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    // #app 实例
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'#app 实例',
+            }
+        }
+    }).mount('#app');
+
+
+    // #root 实例
+    const root = Vue.createApp({
+        data(){
+            return{
+                text:'#root 实例',
+            }
+        }
+    }).mount('#root');
+
+</script>
+
+
+
+
+</body>
+</html>

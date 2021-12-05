@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>全局组件</title>
+</head>
+<body>
+
+<div id="app">
+    <!--    首页    -->
+    <div id="home">
+        <span> ========== 首页 ========== </span>
+        <br>
+        在首页--><my-component></my-component>
+        <box-Component></box-Component>
+    </div>
+    <!--    消息    -->
+    <div id="news">
+        <span>========== 消息========== </span>
+        <br>
+        在消息--><my-component></my-component>
+    </div>
+    <!--    消息    -->
+    <div id="mine">
+        <span>========== 我的========== </span>
+        <br>
+       在我的 --><my-component></my-component>
+        <p>在一个全局组件中使用另一个全局组件</p>
+
+        <box-Component></box-Component>
+    </div>
+
+    <p>-------------- 在根目录上 -------------- </p>
+    <my-component></my-component>
+    <box-Component></box-Component>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    // 创建 vue 组件
+    const app = Vue.createApp({
+        data(){
+            return{
+            }
+        }
+    })
+
+    // 注册全局组件
+    app.component('myComponent',{
+        data(){
+            return{
+                count:0,
+            }
+        },
+        template:`
+            <button @click="count++">
+            你点击了 {{count}} 次
+            </button>
+        `
+    });
+
+
+
+    // 注册全局组件 盒子组件
+    app.component('boxComponent',{
+        template:`
+        <div style="background-color: cornflowerblue; width: 200px;height: 100px;margin: 10px">
+        盒子组件
+        <my-component></my-component>
+        </div>
+        `
+    })
+
+    // 挂载 vue 实例
+    app.mount('#app');
+</script>
+
+</body>
+</html>
