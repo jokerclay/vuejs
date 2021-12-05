@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>父子组件</title>
+</head>
+<body>
+
+<div id="app">
+
+  <h1>{{msg}}</h1>
+  <Counter></Counter>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  // 1 .注册一个 局部 Counter 组件
+  const Counter ={
+    data(){
+      return {
+        count:0,
+        second_msg:'I am clay'
+      }
+    },
+
+    template:`
+            <button @click="count++">点击了 {{count}}</button>
+            <p>不能直接拿 实例里面的数据，只能用自己定义的数据, 封闭性考虑</p>
+            <h2>{{msg}}</h2>
+            <h2>{{second_msg}}</h2>
+        `
+  }
+
+  // 根目录
+  const app = Vue.createApp({
+    data(){
+      return{
+        msg:'HI'
+      }
+    },
+    // 组件选项
+    components: {
+      'Counter':Counter,
+    }
+  }).mount('#app');
+
+</script>
+
+</body>
+</html>

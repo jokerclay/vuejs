@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>data 选项为什么是函数 </title>
+</head>
+<body>
+<p>
+    console.log(obj1 === obj2);
+    <br>
+    => false
+    <br>
+
+</p>
+<a href="https://imgtu.com/i/oDnhlj"><img src="https://s4.ax1x.com/2021/12/05/oDnhlj.png" alt="oDnhlj.png" border="0" /></a>
+
+
+<script>
+    let obj1 = {};
+    let obj2 = {};
+    console.log(obj1 === obj2);     // -> false
+
+    let obj = {
+        name:'clay',
+    }
+    let p1 = obj;
+    let p2 = obj;
+    let p3 = obj;
+
+    console.log(p1,p2,p3);
+    console.log(p1 === p2 );        // -> true
+    console.log(p2 === p3 );        // -> true
+
+</script>
+</body>
+</html>
+

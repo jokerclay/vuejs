@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>data 选项为什么是函数 2 </title>
+</head>
+<body>
+
+<div id="app">
+    <counter></counter>
+    <counter></counter>
+    <counter></counter>
+    <counter></counter>
+    <counter></counter>
+    <counter></counter>
+    <p>每次实例化一个组件都绑定一个新的组件</p>
+</div>
+
+<template id="count">
+    <h3>结果:{{count}}</h3>
+    <button @click="add">+</button>
+    <button @click="sub" >-</button>
+    <p>--------------------------------</p>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const count ={
+        data(){
+            return{
+                count:0,
+            }
+        },
+        template:`#count`
+        ,
+        methods: {
+            add(){
+                this.count++;
+            },
+            sub(){
+                this.count--;
+            },
+        }
+    };
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg: 'hi',
+            }
+        },
+        components: {
+            "counter":count,
+        }
+
+        // data:{
+        //     msg:'Hi',
+        // }
+        // => dataOptions.call is not a function
+        // 如果 data是个对象的话 每个组件都有一个 data, 指向的都是同一个地址空间，
+        // 这样的话，修改了一个 组件中的 data 其他组件的 data 都会改变
+        // data() 是个函数的话 return  一个对象，每次返回的都是一个新的对象,每个 数据都是独立的，不受干扰
+
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>
