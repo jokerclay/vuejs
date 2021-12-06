@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>父传子</title>
+</head>
+<style>
+    #app{
+        text-align: center;
+    }
+    li{
+        list-style: none;
+    }
+</style>
+<body>
+
+<pre style="font-size: 20px">
+</pre>
+
+<div id="app">
+
+    <!--    首页    -->
+    <div id="home">
+        <span>首页</span>
+        <p>传递的都是相对应的数据类型</p>
+        <course-box brand="百度" :colleges="['AR','VR']"></course-box>
+    </div>
+
+    <!--    消息    -->
+    <div id="news">
+        <span>消息</span>
+        <p>传递不相对应的数据类型Vue 会有警告</p>
+        <p>比如：下面的应该是 String 类型的 brand 如果传入对象，控制台会有警告</p>
+        <course-box brand="{name:'brand'}" :colleges="['CSS','C++']"></course-box>
+    </div>
+
+    <!--    我的    -->
+    <div id="mine">
+        <span>我的</span>
+        <p>同样的， colleges 要求传入的数据是数组，如果数据类型不同，会有警告</p>
+        <course-box brand="脸书" :colleges="hahahah"></course-box>
+    </div>
+
+
+    <course-box :brand="msg1" :colleges="msg2"></course-box>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 创建局部组件
+    const box={
+        // 约束接受的数据
+        props:{
+            // 属性名:数据类型
+            brand:String,
+            colleges:Array,
+        },
+        template:`
+          <div>
+	         <p>=========================</p>
+	         <h1>{{brand}}</h1>
+	         <ul>
+	           <li v-for="item in colleges "> {{item}}</li>
+	         </ul>
+	         <p>=========================</p>
+          </div>
+        `,
+    }
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg1:'课程',
+                msg2:['web','java','python','php','c++','c','object-c'],
+            }
+        },
+        components:{
+            'course-box':box,
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

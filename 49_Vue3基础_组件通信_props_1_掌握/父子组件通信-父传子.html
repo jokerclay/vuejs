@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>父传子</title>
+</head>
+<body>
+
+<pre style="font-size: 20px">
+父组件的数据 动态绑定在子组件上 :子组件自定义的 props = " 父组件的数据属性",
+子组件的数据 创建 props 确定接受的数据
+</pre>
+
+<div id="app">
+    <course-box :brand="msg1" :colleges="msg2"></course-box>
+</div>
+
+<template id="box">
+    <div>
+        <p>=========================</p>
+        <h1>{{brand}}</h1>
+        <ul>
+            <li v-for="item in colleges "> {{item}}</li>
+
+        </ul>
+        <p>=========================</p>
+    </div>
+
+</template>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    // 创建局部组件
+    const box={
+        // 接受数据
+        props: ['brand','colleges'],
+        template:`#box`,
+    }
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg1:'课程',
+                msg2:['web','java','python','php','c++','c','object-c'],
+            }
+        },
+        components:{
+            'course-box':box,
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

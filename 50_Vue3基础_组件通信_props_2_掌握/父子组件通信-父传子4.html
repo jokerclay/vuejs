@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>父传子</title>
+</head>
+<style>
+    #app{
+        text-align: center;
+    }
+    li{
+        list-style: none;
+    }
+</style>
+<body>
+
+<pre style="font-size: 20px">
+</pre>
+
+<div id="app">
+
+    <!--    首页    -->
+    <div id="home">
+        <span>首页</span>
+        <course-box :brand="msg1" :colleges="msg2"></course-box>
+
+        <p>--------------------------------------------------------------</p>
+        <p>属性 props 有 required:true 但没有传的话,会有警告</p>
+        <course-box :brand="msg1" :colleges="msg2"></course-box>
+
+        <p>--------------------------------------------------------------</p>
+        <p>属性 props 有 default , 没有传的话，就会是 default 中的值 </p>
+        <course-box :colleges="msg2"></course-box>
+    </div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 创建局部组件
+    const box={
+        // 约束接受的数据
+        props:{
+            // 属性名:{type:数据类型，required:true/false, default:没有传的话里面的默认数据}
+            brand:{type: String,required:true ,default:'我是默认值'},
+            colleges:{type: Array,required:true},
+        },
+        template:`
+          <div>
+	         <p>=========================</p>
+	         <h1>{{brand}}</h1>
+	         <ul>
+	           <li v-for="item in colleges "> {{item}}</li>
+	         </ul>
+	         <p>=========================</p>
+          </div>
+        `,
+    }
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg1:'课程',
+                msg2:['web','java','python','php','c++','c','object-c'],
+            }
+        },
+        components:{
+            'course-box':box,
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>
