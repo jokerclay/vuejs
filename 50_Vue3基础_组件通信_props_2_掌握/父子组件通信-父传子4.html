@@ -22,6 +22,8 @@
     <!--    首页    -->
     <div id="home">
         <span>首页</span>
+        <p>--------------------------------------------------------------</p>
+        <p> 每个条件都符合</p>
         <course-box :brand="msg1" :colleges="msg2"></course-box>
 
         <p>--------------------------------------------------------------</p>
@@ -40,6 +42,7 @@
     const box={
         // 约束接受的数据
         props:{
+            // 最完整的写法
             // 属性名:{type:数据类型，required:true/false, default:没有传的话里面的默认数据}
             brand:{type: String,required:true ,default:'我是默认值'},
             colleges:{type: Array,required:true},
