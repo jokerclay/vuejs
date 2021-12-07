@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>父组件拿到子组件中的内容</title>
+</head>
+<body>
+
+
+<div id="app">
+    <test_box :app_msg="msg_to_box"  ref="box1"></test_box>
+    <button @click="get_child_component">获取子组件</button>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    // 定义一个的自定义子组件
+    const Box ={
+        data(){
+            return{
+                msg:'msg from box'
+            }
+
+        },
+        props:{
+            app_msg:{type:String,required:true},
+
+        },
+        template:`
+            <div style="background-color: blueviolet; width: 300px; height: 300px;">
+            <p >{{app_msg}}</p>
+            <button @click="btn_click">Click me</button>
+            </div>
+        `,
+        components:{
+
+        },
+
+        methods:{
+            btn_click(){
+                alert('you click me');
+            },
+
+        }
+
+    };
+
+
+
+    // 父组件
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg_to_box:'hi,我 从 app 父组件中的数据来，在 Box 子组件里面!',
+            }
+        },
+        components:{
+            'test_box':Box,
+        },
+        methods:{
+            //获取子组件
+            get_child_component(){
+                console.log('来了');
+                console.log(this.$refs);
+                // 拿到子组件 Box 的方法
+                // 组件实例绑定 ref(NOTE-> ref 前面不用加 ：) this.refs 的方式拿到
+                console.log(this.$refs.box1);
+                console.log(this.$refs.box1.msg);
+                console.log(this.$refs.box1.btn_click());
+            },
+        }
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+
+
+
+</body>
+</html>

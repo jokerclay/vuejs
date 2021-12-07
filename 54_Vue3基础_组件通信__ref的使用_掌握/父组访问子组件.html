@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>父组件中使用子组件</title>
 </head>
-<body>
+<body style="background-color:skyblue">
+
+
+<strong>我是 index html</strong>
+<div id="app" style="background-color:salmon; width: 300px;height: 300px;">
+    <h1>{{msg}}</h1>
+    <strong>我是父组件 app 组件 </strong>
+    <my-box :msg_test="test"></my-box>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    // 子组件
+    const Box = {
+        props:{
+            msg_test:{type:String,required:true},
+        },
+
+        template: `
+        <div style="background-color: aqua; width: 200px;height: 100px;">
+        <strong>我是子组件 Box</strong>
+        <p>{{msg_test}}</p>
+        </div>
+        `,
+    };
+
+    // 父组件
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'我是父组件返回的 msg',
+                test:'我是子组件使用父组件数据的例子'
+            }
+        },
+        components:{
+            'my-box':Box,
+        }
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
 
 </body>
 </html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>插槽的基本使用</title>
+</head>
+<body>
+<pre>
+    ---------------------------------------------------------------------
+    1. 生活中很多地方都有插槽， 比如电脑的 USB 接口，插板中的电源
+    2. 插槽的作用在于让原有的设备具有更多的扩展性, 如电脑的USB 可以插 鼠标键盘 硬盘
+    3. 插槽的具体定义：
+                插槽就是子组件的一个占位符，使用  &lt; slot &gt; &lt; /slot &gt;
+                父组件可以在这个占位符中填充任何模板代码 如 html 组件等
+    ---------------------------------------------------------------------
+</pre>
+
+<div id="app">
+    <my_box>
+        <button>插槽在这里起作用了</button>
+    </my_box>
+    <my_box>
+        <input type="text" placeholder="插槽在这里起作用了">
+    </my_box>
+    <my_box>
+        <img src="https://avatars.githubusercontent.com/u/38083660?v=4" alt="" style="width: 50%;">
+    </my_box>
+    <my_box></my_box>
+</div>
+
+<!--盒子的 template-->
+<template id="box">
+    <div style="background-color: aquamarine; width: 300px;height: 300px;">
+        <h1>Clay</h1>
+        <p style="background-color: antiquewhite">I am a p element in box object</p>
+<!--        <button>点我</button>-->
+<!--        预留插槽-->
+        <slot>默认内容</slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    const Box = {
+        data(){
+           return {
+
+           }
+        },
+        template:`#box`,
+    };
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+            }
+        },
+        components:{
+            'my_box':Box,
+        },
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+</body>
+</html>

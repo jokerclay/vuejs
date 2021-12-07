@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>子组件拿到父组件(不建议)</title>
+</head>
+<body>
+
+<div id="app">
+    <my_box></my_box>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    // 自定义子组件
+    const my_btn = {
+        data(){
+            return{
+                count:0,
+            }
+        },
+        template:`
+            <button @click="count++">点击了按钮 {{count}} 次</button>
+            <button @click="change_color()">get parent</button>
+        `,
+        methods:{
+            change_color(){
+                console.log(this.$parent);
+                // 从子组件中拿到父组件
+                console.log(this.$parent.msg);
+                console.log(this.$root.msg);
+            }
+        }
+    };
+
+    const my_box = {
+
+        data(){
+            return{
+                msg:'data from box'
+            }
+        },
+
+        template:`
+            <div style="width: 200px;height: 200px;background-color: red;">
+            <my_btn></my_btn>
+            </div>
+        `,
+        components:{
+            'my_btn':my_btn,
+        }
+
+    };
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi data from app which is the root',
+            }
+        },
+        components:{
+            'my_box':my_box,
+        },
+
+    });
+
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+</body>
+</html>
