@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>父传子</title>
+</head>
+<style>
+    #app{
+        text-align: center;
+    }
+    li{
+        list-style: none;
+    }
+</style>
+<body>
+
+<pre style="font-size: 20px">
+</pre>
+
+<div id="app">
+    <p> ---------------------- 直接写驼峰式不能渲染拿出来 ---------------------- </p>
+        <course-box :myBrand="msg1" :myColleges="msg2"></course-box>
+
+    <p> ----------------------  加 - 能显示出来， HTML 识别不了大小写 ---------------------- </p>
+        <course-box :my-brand="msg1" :my-Colleges="msg2"></course-box>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 创建局部组件
+    const box={
+        // 约束接受的数据
+        props:{
+            // 最完整的写法
+            // 属性名:{type:数据类型，required:true/false, default:没有传的话里面的默认数据}
+
+            myBrand:{type: String,required:true ,default:'我是默认值'},
+            myColleges:{type: Array,required:true},
+        },
+        template:`
+          <div>
+	         <p>=========================</p>
+	         <h1>{{myBrand}}</h1>
+	         <ul>
+	           <li v-for="item in myColleges "> {{item}}</li>
+	         </ul>
+	         <p>=========================</p>
+          </div>
+        `,
+    }
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg1:'课程',
+                msg2:['web','java','python','php','c++','c','object-c'],
+            }
+        },
+        components:{
+            'course-box':box,
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

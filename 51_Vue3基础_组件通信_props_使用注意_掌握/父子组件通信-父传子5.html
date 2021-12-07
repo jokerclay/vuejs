@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>父传子</title>
+</head>
+<style>
+    #app{
+        text-align: center;
+    }
+    li{
+        list-style: none;
+    }
+</style>
+<body>
+
+<pre style="font-size: 20px">
+</pre>
+
+<div id="app">
+        <course-box :brand="msg1" :colleges="msg2"></course-box>
+    <h1>注意：</h1>
+    <p>--------------- 1. props 的数据验证 --------------- </p>
+    <ul>
+        <li>String</li>
+        <li>Number</li>
+        <li>Boolean</li>
+        <li>Array</li>
+        <li>Object</li>
+        <li>Date</li>
+        <li>Function</li>
+        <li>也支持自定义类型</li>
+    </ul>
+    <p>2. 此方式适用于 父组件向子组件 传递数据</p>
+    <p>3. 所有标签属性都会成为组件对象的属性 模板页面可以直接引用</p>
+    <p>4. 存在缺陷 :
+        <br> 1):如果需要向非子后代传递数据必须多层引用
+        <br> 2):兄弟组件之间不能直接 props 通信，必须借助父组件才可以
+    </p>
+
+
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 创建局部组件
+    const box={
+        // 约束接受的数据
+        props:{
+            // 最完整的写法
+            // 属性名:{type:数据类型，required:true/false, default:没有传的话里面的默认数据}
+            brand:{type: String,required:true ,default:'我是默认值'},
+            colleges:{type: Array,required:true},
+        },
+        template:`
+          <div>
+	         <p>=========================</p>
+	         <h1>{{brand}}</h1>
+	         <ul>
+	           <li v-for="item in colleges "> {{item}}</li>
+	         </ul>
+	         <p>=========================</p>
+          </div>
+        `,
+    }
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg1:'课程',
+                msg2:['web','java','python','php','c++','c','object-c'],
+            }
+        },
+        components:{
+            'course-box':box,
+        }
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>
