@@ -1,10 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>作用域插槽</title>
 </head>
 <body>
-$END$
+
+<pre>
+
+</pre>
+
+
+<div id="app">
+    <p>---------------------------- 默认的 slot</p>
+    <my_box></my_box>
+
+    <p>----------------------------  slot 后来里面添加的，用里面的</p>
+    <my_box>
+        <div>
+            <p>this is a test</p>
+        </div>
+    </my_box>
+
+    <p>---------------------------- 作用域插槽，父组件中使用子组件的数据</p>
+    <my_box>
+        <template v-slot:default="slotProps">
+            <span>{{slotProps}}</span>
+            <br>
+            <span>{{slotProps.data.join('-------------')}}</span>
+        </template>
+    </my_box>
+
+    <p>---------------------------- 作用域插槽，父组件中使用子组件的数据</p>
+    <my_box>
+        <template v-slot:default="slotProps">
+            <span>{{slotProps.data.join('***********')}}</span>
+        </template>
+    </my_box>
+
+</div>
+
+<template id="box">
+    <div style="background-color:sandybrown; width: 300px;height: 200px;">
+	   <slot :data="nameArr">
+	       <ul>
+	           <li v-for="name in nameArr">{{name}}</li>
+	       </ul>
+	   </slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 自定义组件 Box
+    const Box = {
+        data(){
+            return{
+                nameArr:['张三','王五','钱一','clay','tim'],
+            }
+        },
+        template:`#box`
+    }
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+            }
+        },
+        components:{
+            'my_box':Box,
+        }
+    });
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
 </body>
+
 </html>

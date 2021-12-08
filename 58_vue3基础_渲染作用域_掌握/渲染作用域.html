@@ -2,15 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>作用域插槽</title>
+    <title>渲染作用域</title>
 </head>
 <body>
 <pre>
-
+    ------------------------------
+    渲染作用域
+    1. 父级模板里的所有内容都是父级作用域中编译的
+    2. 子模板里的所有内容都是在子作用域中编译的
+    3. 父级中的数据用在父级中，子级中的数据用在子级中，即使数据名一样,子级想使用父级的数据要传递
+    渲染作用域
+    ------------------------------
 </pre>
 
+<div id="app">
+    <my_box v-show="isShow"></my_box>
+</div>
+
+<template id="box" >
+    <div style="width: 300px; height: 300px; background-color:skyblue" >
+        <button v-show="isShow">click ME</button>
+    </div>
+</template>
 
 
+<script src="../js/vue.js"></script>
+<script>
+
+    // 子组件
+    const Box = {
+        data(){
+            return {
+                isShow:false,
+            }
+        },
+        template:`#box`,
+    }
+
+    // 父组件
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                isShow:true,
+            }
+        },
+        components: {
+            'my_box':Box,
+        }
+    });
+
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
 
 </body>
 </html>

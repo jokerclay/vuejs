@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>有具体名称的插槽</title>
 </head>
 <body>
-$END$
+
+<div id="app">
+    <my_box>
+        <template v-slot:num1>
+            <button>我在num1 slot</button>
+        </template>
+
+        <template v-slot:num2>
+            <input type="text" placeholder="我在num2 slot">
+        </template>
+
+        <template v-slot:num3>
+            <button>我在num3 slot</button>
+        </template>
+
+        <template v-slot:default>
+            <button>我在 defualt slot</button>
+        </template>
+    </my_box>
+</div>
+
+<template id="box">
+    <p>----------------------------</p>
+    <!--        头部的部分        -->
+    <header style="width:300px;height: 80px;background-color:salmon">
+        <slot name="num1"> 头部的部分</slot>
+    </header>
+
+    <!--        主体的部分        -->
+    <main style="width:300px;height: 120px;background-color:olivedrab">
+        <slot name="num2">主体的部分 </slot>
+
+    </main>
+
+    <!--        尾部的部分        -->
+    <footer style="width:300px;height: 30px;background-color:khaki" >
+        <slot name="num3">尾部的部分</slot>
+    </footer>
+    <p style="width:300px;height: 50px;background-color:lightgray" >
+        <slot></slot>
+    </p>
+    <p>----------------------------</p>
+</template>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    const Box = {
+        data(){
+            return{
+
+            }
+        },
+        template:`#box`
+    };
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+            }
+        },
+        components:{
+            'my_box':Box,
+        }
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
 </body>
 </html>
