@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>no_props</title>
+</head>
+<body>
+
+<div id="app">
+    <h1>{{msg}}</h1>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    // 根组件
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'Hi',
+            }
+        },
+        mounted(){
+            console.log(this.$attrs);
+
+        },
+
+        template:`
+            <div>
+<!--            <my_box :info="msg"> </my_box> -->
+
+<!--          下面这里的 info 依然会绑定在这个 my_box 中                    -->
+<!--          一般不会用 no-props 传递数据，一般用来传递样式或者一些类         -->
+<!--          这些 no-props 【 只绑定最外面的 】 div                       -->
+            <my_box info="this_is_a_test" style="background-color: darkcyan; width: 300px;height: 100px; margin: 10px;"> </my_box>
+
+<!--          如果个同级别标签， no-props 是不生效的-->
+            </div>
+
+        `,
+
+    });
+
+    // 注册全局组件
+    app.component('my_box',{
+        // props:['info'],
+
+        // 不接受 no-props 的属性
+        // inheritAttrs:false,
+
+        template:`
+<!--        如果有多个同级别标签时，no-props 落在绑定 v-bind="$attr" 的标签上-->
+            <div>
+                <p>我是子组件 ---- [ {{info}} ]</p>
+            </div>
+
+            <div></div>
+            <div></div>
+
+            <div v-bind="$attrs">我是子组件</div>
+            <div :s1="$attrs.info">我是子组件</div>
+            <div :style="$attrs.style">我是子组件</div>
+        `
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+</body>
+</html>

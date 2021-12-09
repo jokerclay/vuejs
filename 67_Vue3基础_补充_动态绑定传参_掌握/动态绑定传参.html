@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>动态绑定传参</title>
+</head>
+<body>
+<pre>
+</pre>
+
+
+
+<div id="app">
+    <h1>父组件中的值: {{count}}</h1>
+    <my_box :total="count"></my_box>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    // 创建子组件
+    const Box={
+
+        props:['num1','num2','num3','num4'],
+
+        template:`
+          <div style="margin: 10px;background-color: sandybrown; width: 200px;height: 100px;">
+          数据1:{{num1}}
+          </div>
+
+          <div style="margin: 10px;background-color: sandybrown; width: 200px;height: 100px;">
+          数据2:{{num2}}
+          </div>
+
+          <div style="margin: 10px;background-color: sandybrown; width: 200px;height: 100px;">
+          数据3:{{num3}}
+          </div>
+
+          <div style="margin: 10px;background-color: sandybrown; width: 200px;height: 100px;">
+          数据4:{{num4}}
+          </div>
+
+        `
+    }
+
+    const app = Vue.createApp({
+        data(){
+            return{
+
+                a:100,
+                b:200,
+                c:300,
+                d:400,
+
+                // 对象的 key 要与 props 的数组中的匹配
+                numObj:{
+                    num1:100,
+                    num2:200,
+                    num3:300,
+                    num4:400,
+                },
+            }
+        },
+        components:{
+            'my_box':Box,
+        },
+        template:`
+            <my_box :num1="a", :num2="b", :num3="c", :num4="d", ></my_box>
+        <!--上面的写法有点繁琐，下面为简单的写法-->
+            <p>-------------------------------</p>
+            <my_box v-bind="numObj"></my_box>
+        `,
+    });
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+</body>
+</html>

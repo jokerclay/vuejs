@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>单向数据流</title>
+</head>
+<body>
+<pre>
+    【数据单向的走，不能修改上级组件的数据，因为上级组件的数据也可能被其他组件使用】
+</pre>
+
+
+
+<div id="app">
+    <h1>父组件中的值: {{count}}</h1>
+    <my_box :total="count"></my_box>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    // 创建子组件
+    const Box={
+        data(){
+            return{
+                my_total:this.total
+            }
+        },
+        props:{
+            total:Number,
+        },
+
+        template:`
+          <div style="background-color: sandybrown; width: 200px;height: 200px;">
+          <strong>从父组件传递的值：{{total}}</strong>
+            <button @click="total++">尝试修改父组件中的值</button>
+<!--          [Vue warn]: Attempting to mutate prop "total". Props are readonly.    -->
+
+
+
+
+          <p>----------------------------</p>
+
+
+
+
+          <strong>用自己的值：{{my_total}}</strong>
+            <button @click="my_total++">尝试修改父组件中的值</button>
+          </div>
+        `
+    }
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                count:10,
+            }
+        },
+        components:{
+            'my_box':Box,
+        }
+    });
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+
+
+</body>
+</html>
