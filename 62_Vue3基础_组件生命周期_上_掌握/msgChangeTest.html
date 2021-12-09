@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>msgChaneTest</title>
+</head>
+<body>
+
+
+
+<div id="app">
+    <h1>{{msg}}</h1>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+   // The following work when i try to change the msg  in the console
+   const app = Vue.createApp({
+       data(){
+           return{
+               msg:'this is a msg',
+           }
+       }
+   }).mount('#app');
+
+
+    // The following don't work when i try to change the msg in the console
+
+    // const app = Vue.createApp({
+    //     data(){
+    //         return{
+    //             msg:'this is a msg',
+    //         }
+    //     }
+    // })
+
+    // app.mount('#app');
+
+</script>
+
+</body>
+</html>

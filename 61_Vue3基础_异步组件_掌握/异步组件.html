@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>异步组件</title>
+</head>
+<body>
+<pre>
+    ----------------------------------------------------
+    对于大型应用，很多东西，我们可能需要将应用分割成小的一些代码块，
+    并且只在需要的时候,才从服务器加载一个模块
+    Vue 中通过 defineAsyncComponent 的方法实现异步组件
+    可以把大型应用前面的用户能看到的，写成同步组件，用户看不到的，写成异步组件
+    ----------------------------------------------------
+
+</pre>
+
+<div id="app">
+    <async_item></async_item>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+
+            }
+        }
+    });
+
+    // 全局异步组件
+    app.component('async_item',Vue.defineAsyncComponent(()=>{
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve({
+                    template:`
+                        <div style="background-color: salmon; width: 200px;height: 200px;">
+                            <p>我是返回的异步组件</p>
+                        </div>
+                    `,
+                })
+            },2000);
+
+        });
+    }));
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+</body>
+</html>

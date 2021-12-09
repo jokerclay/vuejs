@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>动态组件</title>
+</head>
+<body>
+<pre>
+    -----------------------------------
+                  动态组件
+    -----------------------------------
+</pre>
+
+<div id="app">
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                c_item:'my_btn',
+            }
+        },
+        methods:{
+            change(){
+                if(this.c_item === 'my_btn'){
+                    this.c_item = 'my_input'
+                }else{
+                    this.c_item = 'my_btn'
+                }
+            }
+        },
+
+
+        template:`
+
+          <p>-------------一般的写法------------</p>
+          <!--     全局组件 my_btn-->
+          <my_btn v-show="c_item === 'my_btn'"></my_btn>
+          <br>
+          <!--     全局组件 my_input-->
+          <my_input v-show="c_item === 'my_input'" ></my_input>
+
+
+          <p>-------------更简洁的写法------------</p>
+          <p>使用 component 标签 的is 属性，直接决定 那个组件显示</p>
+          <component :is="c_item"></component>
+
+
+          <p>-------------失活组件保存缓存------------</p>
+          <p>组价切换之后，组件的内部的缓存丢失，可以用 keep-alive 标签保持缓存</p>
+          <p> keep-alive 标签保持缓存 可以应用于各个标签</p>
+          <keep-alive>
+            <component :is="c_item"></component>
+          </keep-alive>
+
+
+          <button @click="change"  >切换显示</button>
+
+
+        `
+    });
+
+    // 全局组件 my_btn
+    app.component('my_btn',{
+        template:`
+        <div>
+            <button>全局组件按钮</button>
+        </div>
+        `
+    });
+
+    // 全局组件 my_input
+    app.component('my_input',{
+        template:`
+        <div>
+            <input type="text" placeholder="全局组件 my_input">
+        </div>
+        `
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+
+</body>
+</html>

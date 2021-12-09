@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的生命周期</title>
+</head>
+<body>
+<pre>
+   组件的生命周期
+   生命周期函数：在一个组件的【生命周期范围内】 【某一时刻】会 【自动执行】的函数
+    初始化阶段:
+
+    1. beforeCreate()
+    2. created()
+    3. beforeMount()
+    4. mounted()
+    5. beforeUpdate()
+    6. updated()
+    7. beforeUnmount()
+    8. mounted()
+
+
+</pre>
+
+<div id="app">
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                message:'fdskf',
+            }
+        },
+
+        // 生命周期函数：在一个组件的【生命周期范围内】 【某一时刻】会 【自动执行】的函数
+        // 1. 在实例生成之前自动执行
+        beforeCreate() {
+            console.log('beforeCreate()');
+        },
+        // 2. 在实例生成之前自动执行
+        created() {
+            console.log('created()');
+        },
+        // 3. 在组件内容被渲染到页面之前调用
+        beforeMount() {
+            console.log('---------------------');
+            console.log(document.getElementById('app').innerHTML);
+            console.log('beforeMount()');
+            console.log('---------------------');
+
+        },
+
+        // 4. 在组件内容被渲染到页面之后调用
+        mounted() {
+            console.log('---------------------');
+            console.log(document.getElementById('app').innerHTML);
+            console.log('mounted()');
+            console.log('---------------------');
+        },
+        // 5. 当数据发生变化调用,页面并没有变化
+        beforeUpdate() {
+            console.log('beforeUpdate()被调用了');
+        },
+
+        // 6. 当数据发生变化,页面也更新完毕(变化)
+        updated() {
+            console.log('updated()被调用了，数据和界面都更新了');
+        },
+        // 7. 当 Vue 实例失效时调用(自动执行)
+        beforeUnmount() {
+            console.log('---------------------');
+            console.log(document.getElementById('app').innerHTML);
+            console.log('beforeUnmount()被调用了');
+            console.log('---------------------');
+        },
+
+        // 8. 当 Vue 实例失效时,dom 完全销毁 自动执行函数
+        mounted() {
+            console.log('---------------------');
+            console.log(document.getElementById('app').innerHTML);
+            console.log('mounted()被调用了');
+            console.log('---------------------');
+        },
+
+        template:`
+          <h2>{{message}}</h2>
+        `
+    });
+
+    app.mount('#app');
+
+    setTimeout(()=>{
+        // 延迟销毁
+        app.unmount('#app');
+    },3000);
+</script>
+
+</body>
+</html>
