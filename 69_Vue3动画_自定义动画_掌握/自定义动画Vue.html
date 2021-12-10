@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义动画</title>
+    <style>
+
+        @keyframes shake {
+            0%{
+                transform:translateX(0px);
+            }
+            50%{
+                transform:translateX(50px);
+            }
+
+            100%{
+                transform:translateX(100px);
+            }
+        }
+        .box{
+            width: 100px;
+           height: 100px;
+            background-color: #3dded7;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .animate{
+            animation:shake 2s infinite alternate;
+        }
+
+    </style>
+</head>
+<body>
+<p> ----------- 借助vue 自定义动画 ----------- </p>
+
+<div id="app">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                is_animate:false,
+            }
+        },
+        methods: {
+            deal(){
+                this.is_animate = !this.is_animate;
+            },
+        },
+        template:`
+            <div>
+            <div class="box" :class="{animate:is_animate}">test content</div>
+            <button @click="deal">开始/结束</button>
+            </div>
+        `
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+</body>
+</html>

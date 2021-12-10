@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>调用过渡动画</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: #3dded7;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .red{
+            background-color:red;
+        }
+        .blue{
+            background-color:blue;
+        }
+
+        .transition{
+            transition:background-color 1s linear ;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                is_red:true,
+                is_blue:false,
+            }
+        },
+        template:`
+            <div>
+            <div class="box transition" :class="{red:is_red, blue:is_blue}">HI~~~</div>
+            <button @click="change_color">click here to change the color</button>
+            </div>
+        `,
+        methods:{
+            change_color(){
+                this.is_red = !this.is_red;
+                this.is_blue = !this.is_blue;
+            },
+        }
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+
+</body>
+</html>

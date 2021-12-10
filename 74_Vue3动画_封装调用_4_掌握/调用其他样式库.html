@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+</head>
+
+<style>
+    .box{
+        width: 300px;
+        height: 100px;
+        background-color: #3dded7;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+
+    @keyframes shake_from{
+        0%{
+            opacity: 0;
+            transform:translateX(0px);
+        }
+        50%{
+            opacity: 0.5;
+            transform:translateX(50px);
+        }
+
+        100%{
+            opacity: 1;
+            transform:translateX(100px);
+        }
+    }
+
+
+    @keyframes shake_to{
+        0%{
+            opacity: 1;
+            transform:translateX(0px);
+        }
+        50%{
+            opacity: 0.5;
+            transform:translateX(50px);
+        }
+
+        100%{
+            opacity: 0;
+            transform:translateX(100px);
+        }
+    }
+
+
+    .v-enter-from{
+        opacity:0;
+    }
+    .v-enter-active{
+        /* 过渡 */
+        transition:all 1s ease-in;
+        /* 动画 */
+        animation: shake_from 10s;
+
+    }
+    .v-leave-active{
+        /* 过渡 */
+        transition:all 1s ease-in;
+        /* 动画 */
+        animation: shake_to 10s;
+    }
+
+    .v-enter-to{
+        opacity:1;
+    }
+    .v-leave-to{
+        opacity:0;
+    }
+</style>
+
+
+<body>
+<pre>
+
+animate__flipInX
+
+</pre>
+
+
+<div id="app">
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'HI, 强得很',
+                flag:false,
+            }
+        },
+        template:`
+            <div>
+
+            <transition :duration="{enter:3000,leave: 100}"
+                        enter-active-class="animate__animated  animate__flipInX"
+                        leave-active-class="animate__animated  animate__flipInX"
+            >
+              <div class="box" v-show="flag">
+                <h1 >{{msg}}</h1>
+              </div>
+            </transition>
+            <button @click="flag =!flag">click here to show the content</button>
+            </div>
+        `
+    });
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+</body>
+</html>

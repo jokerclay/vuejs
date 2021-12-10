@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-动画-2</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 100px;
+            background-color: #3dded7;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        @keyframes shake_from{
+            0%{
+                opacity: 0;
+                transform:translateX(0px);
+            }
+            50%{
+                opacity: 0.5;
+                transform:translateX(50px);
+            }
+
+            100%{
+                opacity: 1;
+                transform:translateX(100px);
+            }
+        }
+
+
+        @keyframes shake_to{
+            0%{
+                opacity: 1;
+                transform:translateX(0px);
+            }
+            50%{
+                opacity: 0.5;
+                transform:translateX(50px);
+            }
+
+            100%{
+                opacity: 0;
+                transform:translateX(100px);
+            }
+        }
+
+        .v-enter-active{
+            animation: 2s shake_from;
+        }
+        .v-leave-active{
+            animation: 2s shake_to;
+        }
+        .test-enter-active{
+            animation: 4s shake_from;
+        }
+        .test-leave-active{
+            animation: 4s shake_to;
+        }
+    </style>
+</head>
+<body>
+<pre>
+    vue 中的动画用 transition  包裹
+    当有多个 transition 标签时，使用 name 标签 区分, 将 name 将 v-enter-active -> ur_name-enter-active
+</pre>
+
+<div id="app">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'HI, 强得很',
+                flag:false,
+            }
+        },
+        template:`
+            <div>
+
+            <transition name="test">
+              <div class="box" v-show="flag">
+                <h1 >{{msg}}</h1>
+              </div>
+            </transition>
+
+            <transition>
+              <div class="box" v-show="flag">
+                <h1 >{{msg}}</h1>
+              </div>
+            </transition>
+
+            <transition>
+              <div class="box" v-show="flag">
+                <h1 >{{msg}}</h1>
+              </div>
+            </transition>
+
+            <transition>
+              <div class="box" v-show="flag">
+                <h1 >{{msg}}</h1>
+              </div>
+            </transition>
+
+
+
+            <button @click="flag =!flag">click here to show the content</button>
+            </div>
+        `
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+</body>
+</html>

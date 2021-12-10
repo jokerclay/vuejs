@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义动画</title>
+    <style>
+
+        @keyframes shake {
+            0%{
+                transform:translateX(0px);
+            }
+            50%{
+                transform:translateX(50px);
+            }
+
+            100%{
+                transform:translateX(100px);
+            }
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: orangered;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            /*transition: all 2s ease-in-out;*/
+
+        /*    自定义动画     */
+            animation:shake 1s infinite alternate;
+        }
+
+        /*.box:hover{*/
+        /*    width: 400px;*/
+        /*    height: 400px;*/
+        /*    background-color:darkgreen;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<p> ----------- 不借助vue CSS3 自定义动画 ----------- </p>
+<div class="box">
+
+</div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

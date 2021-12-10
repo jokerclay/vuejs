@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-动画-1</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 100px;
+            background-color: #3dded7;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        /*    入场动画类     */
+        .v-enter-from{
+            opacity:0
+        }
+        .v-enter-active{
+            transition: all 2s ease-in;
+        }
+        .v-enter-to{
+            opacity:1
+        }
+
+        /*    离场动画类     */
+        .v-leave-from{
+            opacity:1
+        }
+        .v-leave-active{
+            transition: all 2s ease-out;
+        }
+        .v-leave-to{
+            opacity:0
+        }
+
+    </style>
+</head>
+<body>
+<pre>
+    1. 把要过渡的元素放到 &lt; transition &gt;  &lt; /transition&gt; 中间
+            note: &lt; transition &gt;  &lt; /transition&gt; 标签只有 Vue 中有
+</pre>
+
+<div id="app">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'HI, 强得很',
+                flag:false,
+            }
+        },
+        template:`
+            <div>
+            <div class="box">
+              <transition>
+                <h1 v-show="flag">{{msg}}</h1>
+              </transition>
+            </div>
+            <button @click="flag =!flag">click here to show the content</button>
+            </div>
+        `
+    });
+
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>过渡和动画结合</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 100px;
+            background-color: #3dded7;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+
+        @keyframes shake_from{
+            0%{
+                opacity: 0;
+                transform:translateX(0px);
+            }
+            50%{
+                opacity: 0.5;
+                transform:translateX(50px);
+            }
+
+            100%{
+                opacity: 1;
+                transform:translateX(100px);
+            }
+        }
+
+
+        @keyframes shake_to{
+            0%{
+                opacity: 1;
+                transform:translateX(0px);
+            }
+            50%{
+                opacity: 0.5;
+                transform:translateX(50px);
+            }
+
+            100%{
+                opacity: 0;
+                transform:translateX(100px);
+            }
+        }
+
+
+        .v-enter-from{
+            opacity:0;
+        }
+        .v-enter-active{
+            /* 过渡 */
+            transition:all 1s ease-in;
+            /* 动画 */
+            animation: shake_from 10s;
+
+        }
+        .v-leave-active{
+            /* 过渡 */
+            transition:all 1s ease-in;
+            /* 动画 */
+            animation: shake_to 10s;
+        }
+
+        .v-enter-to{
+            opacity:1;
+        }
+        .v-leave-to{
+            opacity:0;
+        }
+    </style>
+</head>
+<body>
+<!--<pre>-->
+<!--    &gt;&lt;-->
+
+<!--            &lt; transition type="animation"&gt;   &lt; /transition&gt; 以自定义动画为主-->
+<!--            &lt; transition type="transition "&gt;   &lt; /transition&gt;以 过渡为主-->
+<!--            :duration = "5000 " 控制所有效果的时长-->
+
+<!--</pre>-->
+
+<div id="app">
+    <h1>{{msg}}</h1>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'HI, 强得很',
+                flag:false,
+            }
+        },
+        template:`
+            <div>
+
+            <transition :duration="{enter:3000,leave: 200}">
+              <div class="box" v-show="flag">
+                <h1 >{{msg}}</h1>
+              </div>
+            </transition>
+            <button @click="flag =!flag">click here to show the content</button>
+            </div>
+        `
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+</script>
+
+</body>
+</html>
