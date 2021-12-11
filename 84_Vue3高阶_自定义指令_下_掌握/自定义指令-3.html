@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令 - 2 </title>
+</head>
+<body>
+
+<div id="app">
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                isShow:true,
+            }
+        },
+        template:`
+
+            <div v-if="isShow">
+            <input type="text" placeholder="输入姓名"  v-focus >
+            </div>
+        `,
+
+        directives:my_directive,
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title> mixin 2 </title>
+</head>
+<body>
+
+<pre>
+    ------------------------------------------------------------------
+    在 mixin  对象中 混入键值对， 可以通过 this.$option 拿到 mixin 中的 键值对
+    如果 mixin 中的 键值对 与 组件 中 冲突的话， 组件的 优先级高于 mixin
+
+    但可以 配置 改变使用 的优先级
+    优先 使用组件 mixin 中的 值
+    app1.config.optionMergeStrategies.age = (mixinVal,appVal)=>{
+        return mixinVal || appVal ;
+    }
+
+    配置全局 mixin 所有组件都可以使用这个 mixin
+    app1.mixin({
+
+    })
+
+    ------------------------------------------------------------------
+</pre>
+
+<div id="app1">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 定义一个 mixin  对象
+    const my_mixin= {
+        // 自定义属性
+        age:100,
+    }
+
+    // app 1 实例
+    const app1 = Vue.createApp({
+        mixins:[my_mixin],
+
+        age: 99,
+
+        data(){
+            return{
+                message:"我是 组件 app1 中的 message",
+            }
+        },
+
+        methods:{
+            hello(){
+
+            },
+        },
+
+        template:`
+            <h2>{{message}}</h2>
+            <h2>age : {{this.$options.age}}</h2>
+            <button @click="hello">Hello</button>
+        `,
+        mounted(){
+
+        },
+    });
+    // 优先 使用组件 app1 中的 值
+    // app1.config.optionMergeStrategies.age = (mixinVal,appVal)=>{
+    //     return appVal || mixinVal;
+    // }
+
+
+    // 优先 使用组件 mixin 中的 值
+    app1.config.optionMergeStrategies.age = (mixinVal,appVal)=>{
+        return mixinVal || appVal ;
+    }
+    // 配置全局 mixin
+    app1.mixin({
+
+    })
+
+    // 挂载 Vue 实例
+    app1.mount('#app1');
+
+</script>
+</body>
+</html>

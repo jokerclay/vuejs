@@ -13,7 +13,6 @@
             align-items:center;
         }
 
-
         @keyframes shake_from{
             0%{
                 opacity: 0;
@@ -100,14 +99,47 @@
         template:`
             <div>
 
-            <transition :duration="{enter:3000,leave: 200}">
+            <transition :css = 'false'
+                        @before-enter="before_enter"
+                        @enter="enter"
+                        @after-enter="after_enter"
+            >
               <div class="box" v-show="flag">
                 <h1 >{{msg}}</h1>
               </div>
             </transition>
             <button @click="flag =!flag">click here to show the content</button>
             </div>
-        `
+        `,
+        methods:{
+            before_enter(el,){
+                el.style.borderRadius = "0%"
+            },
+            enter(el,done){
+                console.log('enter --- 来了')
+                // 定时器
+                const intervalId = setInterval(()=>{
+                    const radius = el.style.borderRadius;
+                    if (radius === '0%' ){
+                        el.style.borderRadius = '50%';
+                    }else{
+                        el.style.borderRadius = '0%';
+                    }
+                },1000);
+
+                // 10s 之后进入动画完成
+                setTimeout(()=>{
+                    // 清除定时器
+                    clearInterval(intervalId);
+                    done();
+                },3000);
+            },
+            after_enter(el){
+                console.log('after_enter --- 来了')
+                el.style.borderRadius= '0%';
+                el.style.backgroundColor= 'red';
+            }
+        }
     });
 
     // 挂载 Vue 实例

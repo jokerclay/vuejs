@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>多组件实现动画</title>
+    <style>
+        /*    入场动画类     */
+        .v-enter-from{
+            opacity:0
+        }
+        .v-enter-active{
+            transition: all 0.3s ease-in;
+        }
+        .v-enter-to{
+            opacity:1
+        }
+
+        /*    离场动画类     */
+        .v-leave-from{
+            opacity:1
+        }
+        .v-leave-active{
+            transition: all 0.3s ease-out;
+        }
+        .v-leave-to{
+            opacity:0
+        }
+
+    </style>
+</head>
+<body>
+<pre>
+    -------------------------
+
+    -------------------------
+</pre>
+
+
+
+<div id="app">
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    // 局部组件 Box1
+    const Box1={
+        template:` <div style="width: 100px;height: 100px;background-color: #3dded7">
+        <strong>box 1</strong>
+        </div>
+        `,
+
+    }
+
+    // 局部组件 Box2
+    const Box2={
+        template:` <div style="width: 100px;height: 100px;background-color: salmon">
+        <strong>box 2</strong>
+        </div>
+
+        `,
+    }
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                flag:true,
+                components:'my_box1'
+            }
+        },
+        template:`
+            <div>
+            <transition mode="out-in" appear>
+              <button v-if="flag" >点我</button>
+              <p v-else>take a guess</p>
+            </transition>
+            <p>--------------------</p>
+            <button @click="handle_click">测试按钮</button>
+
+
+
+
+            <p>--------------- 组件间动画--------------- </p>
+            <transition mode="out-in" appear>
+              <!--  component 标签动态绑定    -->
+              <component :is="components"></component>
+            </transition>
+
+            <button @click="handle_box_click">点击切换</button>
+            </div>
+        `,
+
+        methods:{
+            handle_click(){
+                this.flag = !this.flag;
+            },
+            handle_box_click(){
+                if(this.components === 'my_box1'){
+                    this.components = 'my_box2'
+                }else{
+                    this.components = 'my_box1'
+                }
+
+            }
+
+        },
+        components:{
+            'my_box1':Box1,
+            'my_box2':Box2,
+        },
+
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+</body>
+</html>

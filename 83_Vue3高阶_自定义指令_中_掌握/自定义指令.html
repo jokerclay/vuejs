@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令 - 2 </title>
+</head>
+<body>
+
+<div id="app">
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    // 自定义局部指令
+    const  my_directive = {
+        focus:{
+            created(){
+                console.log('created()')
+            },
+            beforeMount(){
+                console.log('beforeMount()')
+            },
+            mounted(el){
+                el.focus();
+                console.log('mounted()')
+            },
+
+            beforeUpdate(){
+                console.log('beforeUpdate()')
+            },
+            updated(){
+                console.log('updated()')
+            },
+            beforeUnmount(){
+                console.log('beforeUnmount()')
+            },
+            unmounted(){
+                console.log('unmounted()')
+            },
+
+        }
+    };
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                isShow:true,
+            }
+        },
+        template:`
+<!--            <div v-show="isShow">-->
+<!--            <input type="text" placeholder="输入姓名"  v-focus >-->
+<!--            </div>-->
+
+
+            <div v-if="isShow">
+            <input type="text" placeholder="输入姓名"  v-focus >
+            </div>
+        `,
+
+        directives:my_directive,
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

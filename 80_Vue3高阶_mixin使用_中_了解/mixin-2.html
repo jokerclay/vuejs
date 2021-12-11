@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title> mixin 2 </title>
+</head>
+<body>
+
+<pre>
+    -------------------------------------------------
+    1. 组件中的 data, methods , computed 属性 的优先级 是高于 mixin 的
+       两者不冲突时 合并使用
+       当两者有冲突时，先使用 组件中的 数据或方法
+    2. mixin 中也有一些生命周期函数， 当 mixin 和 组件中都有
+       一些生命周期钩子函数时冲突时， 两者都会执行
+       但 mixin 中的钩子函数会先执行
+    -------------------------------------------------
+</pre>
+
+<div id="app1">
+</div>
+
+<p>------------------------------</p>
+
+<div id="app2">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 定义一个 mixin  对象
+    const my_mixin= {
+        data(){
+            return{
+                message:"我是 mixin 中的 message,与组件 app1 中的 message 冲突"
+            }
+        },
+        methods:{
+            hi(){
+                alert('我是 mixin 的alert')
+            },
+
+            hello(){
+                alert('我是 mixin 的alert')
+            }
+        },
+        mounted(){
+            console.log('+++++++++++++++ 实例完成 +++++++++++++++ ')
+        }
+
+    }
+
+    // app 1
+    const app1 = Vue.createApp({
+        mixins:[my_mixin],
+
+        data(){
+            return{
+                message:"我是 组件 app1 中的 message",
+            }
+        },
+
+        methods:{
+            hello(){
+                alert('我是 app1 的alert')
+            },
+        },
+
+        template:`
+            <h2>{{message}}</h2>
+            <button @click="hello">Hello</button>
+            <button @click="hi">hi</button>
+        `,
+        mounted(){
+            console.log('----------------实例完成 ----------------')
+        }
+
+    });
+
+    // 挂载 Vue 实例
+    app1.mount('#app1');
+
+    // app 2
+    const app2 = Vue.createApp({
+        mixins:[my_mixin],
+
+        data(){
+            return{
+                msg:'Hi~~~~~',
+            }
+        },
+
+        methods:{
+            hello(){
+                alert('我是 app2 的alert');
+            },
+        },
+
+        template:`
+            <h2>{{message}}</h2>
+            <button @click="hello">Hello</button>
+            <button @click="hi">hi</button>
+        `,
+    });
+
+    // 挂载 Vue 实例
+    app2.mount('#app2');
+</script>
+
+
+
+</body>
+</html>

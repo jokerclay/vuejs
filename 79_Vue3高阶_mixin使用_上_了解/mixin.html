@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title> mixin 基础使用 </title>
+</head>
+<body>
+<pre>
+    把组件 与 组件之间 一些经常用的 放到一个mixin 对象中，
+    使用时 直接 用 mixins 属性调用
+</pre>
+
+<div id="app1">
+</div>
+<p>------------------------------</p>
+<div id="app2">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 定义一个 mixin  对象
+    const my_mixin= {
+        data(){
+            return{
+                message:"this is clay"
+            }
+        },
+    }
+
+    // app 1
+    const app1 = Vue.createApp({
+        mixins:[my_mixin],
+
+        data(){
+            return{
+                msg:'Hi~~~~~',
+            }
+        },
+
+        methods:{
+            hello(){
+                alert('hello')
+            },
+        },
+
+        template:`
+            <h1>{{msg}}</h1>
+            <h2>{{message}}</h2>
+            <button @click="hello">Hello</button>
+        `,
+
+    });
+
+    // 挂载 Vue 实例
+    app1.mount('#app1');
+
+    // app 2
+    const app2 = Vue.createApp({
+        mixins:[my_mixin],
+
+        data(){
+            return{
+                msg:'Hi~~~~~',
+            }
+        },
+
+        methods:{
+            hello(){
+                alert('hello')
+            },
+        },
+
+        template:`
+            <h1>{{msg}}</h1>
+            <h2>{{message}}</h2>
+            <button @click="hello">Hello</button>
+        `,
+
+    });
+
+    // 挂载 Vue 实例
+    app2.mount('#app2');
+</script>
+
+
+
+</body>
+</html>
+

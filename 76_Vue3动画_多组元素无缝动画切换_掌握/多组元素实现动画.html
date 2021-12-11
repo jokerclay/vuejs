@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>多组元素实现动画</title>
+    <style>
+        /*    入场动画类     */
+        .v-enter-from{
+            opacity:0
+        }
+        .v-enter-active{
+            transition: all 2s ease-in;
+        }
+        .v-enter-to{
+            opacity:1
+        }
+
+        /*    离场动画类     */
+        .v-leave-from{
+            opacity:1
+        }
+        .v-leave-active{
+            transition: all 2s ease-out;
+        }
+        .v-leave-to{
+            opacity:0
+        }
+
+    </style>
+</head>
+<body>
+<pre>
+    -------------------------
+    让两个元素切换有动画效果
+    transition 标签 mode 属性
+    mode="out-in"
+    mode="in-out"
+    appear 一出来就有动画
+    -------------------------
+</pre>
+
+
+
+<div id="app">
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+                flag:true,
+            }
+        },
+        template:`
+            <div>
+            <transition mode="out-in" appear>
+              <button v-if="flag" >点我</button>
+              <p v-else>take a guess</p>
+            </transition>
+            <p>--------------------</p>
+            <button @click="handle_click">点击切换</button>
+            </div>
+        `,
+        methods:{
+            handle_click(){
+                this.flag = !this.flag;
+            },
+
+        },
+
+    });
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+
+
+</body>
+</html>

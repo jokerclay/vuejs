@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>列表过渡</title>
+    <style>
+        .list-item{
+            display: inline-block;
+            margin:10px;
+            background-color:sandybrown;
+        }
+        .v-enter-from{
+            opacity:0;
+            transform: translateY(30px);
+        }
+        .v-enter-active{
+            transition: all 0.5s ease-in;
+        }
+        .v-enter-to{
+            opacity:1;
+            transform: translateY(0px);
+
+        }
+
+        .v-leave-from{
+            opacity:1;
+            transform: translateY(0px);
+        }
+        .v-leave-active{
+            transition: all 0.5s ease-in;
+
+        }
+        .v-leave-to{
+            opacity:0;
+            transform: translateY(-30px);
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div id="app">
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                list:['test-1','test-2','test-3','test-4']
+            }
+        },
+        template:`
+          <transition-group>
+          <div class="list-item"  v-for="item in list" key="item">{{item}}</div>
+          </transition-group>
+          <p>----------------------------------------</p>
+          <button @click="add">增加</button>
+          <button @click="del">删除</button>
+        `,
+        methods:{
+            add(){
+                this.list.push('test-' + (this.list.length + 1))
+            },
+            del(){
+                this.list.pop();
+            },
+        },
+
+    });
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+
+
+
+</body>
+</html>
