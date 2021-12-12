@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>ref</title>
+</head>
+<body>
+
+<pre>
+    1. ref:让基础类型的数据 具备响应式
+</pre>
+
+<div id="app">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+        setup(props,context) {
+
+            // 引入 ref
+            const {ref} = Vue;
+            // 使用ref, 让 基础类型 具有响应式
+            // 底层通过代理（proxy） 'this is a ref test' => proxy({value:'this is a ref test'})
+            let msg = ref('this is a ref test');
+
+            setTimeout(()=>{
+                // 不能直接写 msg = 'john' 因为通过 ref() 已经将 msg 转为对象，要 msg.value 来改变
+               msg.value = 'john'
+            },3000)
+
+
+            return {
+                msg,
+            }
+        },
+
+        template:`
+            <div>
+              <h1>{{msg}}</h1>
+            </div>
+        `,
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

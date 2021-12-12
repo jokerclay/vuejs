@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>选项式 API</title>
+</head>
+<body>
+
+<div id="app">
+    <h1>{{msg}}</h1>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        data(){
+            return{
+                msg:'hi',
+            }
+        }
+    });
+
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+
+</body>
+</html>

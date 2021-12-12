@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>自定义指令 - 2 </title>
+    <style>
+        .box{
+            width: 200px;
+            height:200px;
+            background-color:chocolate;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+<pre>
+    1. 自定的指令，对应元素 通过 el, 拿
+                 传入数据，通过 binding
+
+    app.directive('指令名',(el,binding)=>{
+        console.log(el);
+        console.log(binding);
+    });
+</pre>
 
 <div id="app">
 </div>
@@ -16,18 +33,43 @@
     const app = Vue.createApp({
         data(){
             return{
-                isShow:true,
+                pos_data:{
+                    top:100,
+                    left:400,
+                },
             }
         },
-        template:`
 
-            <div v-if="isShow">
-            <input type="text" placeholder="输入姓名"  v-focus >
+        template:`
+            <div class="box" v-fixed="pos_data" >
+            <p>this is a test content</p>
             </div>
         `,
 
-        directives:my_directive,
-    }).mount('#app');
+    });
+    //
+    // app.directive('fixed',(el,binding)=>{
+    //     console.log(el);
+    //     console.log(binding);
+    //     el.style.position = 'fixed';
+    //     el.style.left = binding.value.left + 'px';
+    //     el.style.top = binding.value.top + 'px';
+    // });
+
+
+    // 也可以用钩子来写
+    app.directive('fixed',{
+        mounted(el,binding){
+            console.log(el);
+            console.log(binding);
+            el.style.position = 'fixed';
+            el.style.left = binding.value.left + 'px';
+            el.style.top = binding.value.top + 'px';
+        }
+    });
+
+
+    app.mount('#app');
 
 </script>
 

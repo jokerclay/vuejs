@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>setup()</title>
+</head>
+<body>
+
+<pre>
+    尽量不用 options API, 尽量使用
+</pre>
+
+<div id="app">
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = Vue.createApp({
+        // setup 可以理解为 一个调度者
+        // setup 函数中不能调用生命周期中的东西, 生命周期可以调用 setup()
+        // setup 不能调用 this, 因为没有被挂载
+
+        setup(props,context){
+            // props -> 组件之间数据传递
+            // context -> 上下文
+
+            // this.deal is not a function , 在 setup 中不能调用
+            // setup 在实例被 初始化 之前就调用了
+            // this.deal();
+
+            // return 不仅能返回属性，还能返回函数
+            return{
+                msg:'this is a test',
+                log:()=>{
+                    alert('log function return test')
+                },
+            }
+        },
+
+        template:`
+          <h1>{{msg}}</h1>
+          <button @click="log"> click me</button>
+          <button @click="deal"> click me to see the setup function</button>
+        `,
+        methods:{
+            deal(){
+                alert('调用了')
+                console.log(this.$options.setup());
+            },
+        },
+    });
+
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+
+
+
+</body>
+</html>
