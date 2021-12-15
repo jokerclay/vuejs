@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>reactive</title>
+</head>
+<body>
+
+<pre>
+    1. reactive:让基础类型的数据 具备响应式
+</pre>
+
+<div id="app">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+        setup(props,context) {
+
+            // 引入 reactive
+            const {reactive} = Vue;
+            // proxy: {name:'clay',sex:'male'} -> proxy({name:'clay',sex:'male'})
+
+            // let pObj = {name:'clay',sex:'male'};
+
+            // 使用reactive, 让 引用类型 具有响应式
+            // 底层也是 proxy 代理
+
+            let pObj = reactive({name:'clay',sex:'male'});
+            let parry = reactive(["vue", "react"]);
+
+            setTimeout(()=>{
+                pObj.name = 'test_name';
+                pObj.sex = 'test_sex';
+
+            },2000);
+
+            return {
+                pObj,
+                parry,
+            }
+        },
+
+        template:`
+            <div>
+              <h1>姓名：{{pObj.name}} 性别：{{pObj.sex}}</h1>
+              <br>
+              <h1>数组:{{parry}}</h1>
+
+              <h1>数组 1：{{parry[0]}}
+                <br>
+                数组 2：{{parry[1]}}
+              </h1>
+            </div>
+        `,
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

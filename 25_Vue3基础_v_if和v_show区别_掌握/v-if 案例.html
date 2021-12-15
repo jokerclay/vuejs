@@ -58,20 +58,20 @@
 
 <script src="../js/vue.js"></script>
 <script>
-
     const app = Vue.createApp({
         data(){
             return{
                 loginType: 'phone',
             }
         },
+
         methods: {
             change(){
                 this.loginType === 'phone' ? this.loginType= 'wechat' : this.loginType= 'phone';
             }
         }
-    }).mount('#app');
 
+    }).mount('#app');
 </script>
 
 </body>

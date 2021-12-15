@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="cn"> <head>
+    <meta charset="UTF-8">
+    <title>to_refs</title>
+</head>
+<body>
+
+<pre>
+    ------------------------------------------
+
+    ------------------------------------------
+</pre>
+
+<div id="app">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+        setup(props,context) {
+
+            // 引入 to_ref
+            const {reactive,toRefs} = Vue;
+            let pObj = reactive({name:'clay',sex:'male'});
+
+            setTimeout(()=>{
+                name.value = 'test_name';
+                sex.value = 'test_sex';
+            },2000);
+
+            const {name, sex} = toRefs(pObj);
+            return {
+                name,
+                sex,
+            };
+        },
+
+        template:`
+            <div>
+              <h1>姓名：{{name}} 性别：{{sex}}</h1>
+            </div>
+        `,
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

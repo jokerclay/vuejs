@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="cn"> <head>
+    <meta charset="UTF-8">
+    <title>to_refs</title>
+</head>
+<body>
+
+<pre>
+    ------------------------------------------
+    一般情况， 解构出来的数据 不具备响应式的能力了
+    可以使用 toRefs 使他具有响应式
+    ------------------------------------------
+</pre>
+
+<div id="app">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+        setup(props,context) {
+
+            // 引入 to_ref
+            const {reactive,toRefs} = Vue;
+            let pObj = reactive({name:'clay',sex:'male'});
+
+            setTimeout(()=>{
+                pObj.name = 'test_name';
+                pObj.sex = 'test_sex';
+            },2000);
+
+            // 解构出来的数据 不具备响应式的能力了
+            // const {name, sex} = pObj;
+
+            // 使用 toRefs 使其具有响应式能力
+            const {name, sex} = toRefs(pObj);
+            // toRefs 底层做了什么 ？
+            /*
+                 name:proxy({value:'clay'})   ==>    sex:proxy({value:'male'})
+           */
+
+            return {
+                name,
+                sex,
+            };
+
+        },
+
+        template:`
+            <div>
+              <h1>姓名：{{name}} 性别：{{sex}}</h1>
+            </div>
+        `,
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>

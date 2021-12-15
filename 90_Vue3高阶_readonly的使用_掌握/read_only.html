@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>readonly</title>
+</head>
+<body>
+
+<pre>
+    readonly 我们不希望 vue  的单向数据流被破坏
+</pre>
+
+<div id="app">
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = Vue.createApp({
+        setup(props,context) {
+
+            // 引入
+            const {readonly} = Vue;
+            // 根据 vue 单向数据流的 特点 我们不希望 数据被改变,使用 readonly
+            let pObj = readonly({name:'clay',sex:'male'});
+
+            setTimeout(()=>{
+                pObj.name = 'test_name';
+                pObj.sex = 'test_sex';
+
+            },2000);
+
+            return {
+                pObj,
+            }
+        },
+
+        template:`
+            <div>
+              <h1>姓名：{{pObj.name}} 性别：{{pObj.sex}}</h1>
+            </div>
+        `,
+    }).mount('#app');
+
+</script>
+
+</body>
+</html>
