@@ -3,7 +3,6 @@
     <title>to_refs</title>
 </head>
 <body>
-
 <pre>
     ------------------------------------------
 
@@ -19,24 +18,28 @@
         setup(props,context) {
 
             // 引入 to_ref
-            const {reactive,toRefs} = Vue;
+            const {reactive,toRefs,toRef} = Vue;
             let pObj = reactive({name:'clay',sex:'male'});
+            let {name, sex} = toRefs(pObj);
+            let age = toRef(pObj, 'age');
 
             setTimeout(()=>{
                 name.value = 'test_name';
                 sex.value = 'test_sex';
+                age.value = 100;
             },2000);
 
-            const {name, sex} = toRefs(pObj);
+
             return {
                 name,
                 sex,
+                age,
             };
         },
 
         template:`
             <div>
-              <h1>姓名：{{name}} 性别：{{sex}}</h1>
+              <h1>姓名：{{name}} 性别：{{sex}} 年龄：{{age}}</h1>
             </div>
         `,
     }).mount('#app');

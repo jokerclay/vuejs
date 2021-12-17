@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>context</title>
+</head>
+<body>
+
+<div id="app">
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    // 创建 局部组件
+    const my_box = {
+        data(){
+            return {
+                msg:'data in 子组件'
+            }
+        },
+        template:`
+          <div style="background-color: cornflowerblue; width: 100px;height: 100px;">
+          <strong>子组件</strong>
+          </div>
+        `,
+        props:{
+            test:{type:String,required:true},
+        },
+    }
+
+    const app = Vue.createApp({
+        data(){
+            return{
+
+            }
+        },
+        template:`
+            <div style="background-color: sandybrown; width: 300px;height: 300px;">
+            <strong>父组件</strong>
+            <my_box></my_box>
+
+            </div>
+        `,
+        components:{
+            'my_box':my_box,
+        }
+    });
+
+
+    // 挂载 Vue 实例
+    app.mount('#app');
+
+</script>
+
+
+
+</body>
+</html>
